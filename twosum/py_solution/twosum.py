@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+from typing import List
+
 """
 Given an array of integers, return indices of the two numbers such that 
 they add up to a specific target.
@@ -20,7 +22,13 @@ class Solution:
         """
             O(n) solution
         """
-        # make nums(list) into dictionary
-        nums_dict = { key: value for value, key in enumerate(nums) }
-
+        map_     = {}
+        idx      = 0
+        
+        for v in nums:
+            if target - v in map_.keys():
+                return [map_[target -v], idx]
+            map_[v] = idx
+            idx += 1
+        return [-1, -1]
     # End twoSum
