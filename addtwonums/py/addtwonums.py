@@ -29,6 +29,32 @@ class Solution:
         run2 = l2
         ret_ = None
         run_ret = None
+        
+        while run1 or run2:
+            sum_ = (0 if run1 is None else run1.val) + \
+                   (0 if run2 is None else run2.val) + \
+                   carry_
+            if not ret_:
+                ret_ = ListNode(sum_ % 10)
+                run_ret = ret_
+            else:
+                run_ret.next = ListNode(sum_ % 10)
+                run_ret = run_ret.next
+            carry_ = sum_ // 10
+            run1 = (None if run1 is None else run1.next)
+            run2 = (None if run2 is None else run2.next)
+        if carry_:
+            run_ret.next = ListNode(carry_)
+
+        return ret_
+
+
+    def addTwoNumbers_(self, l1: ListNode, l2: ListNode)-> ListNode:
+        carry_ = 0
+        run1 = l1
+        run2 = l2
+        ret_ = None
+        run_ret = None
 
         while run1 and run2:
             sum_ = run1.val + run2.val + carry_
