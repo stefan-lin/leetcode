@@ -27,42 +27,47 @@ class Solution:
         carry_ = 0
         run1 = l1
         run2 = l2
-        ret_node = None
+        ret_ = None
         run_ret = None
 
         while run1 and run2:
-            sum_node = run1.val + run2.val
+            sum_ = run1.val + run2.val + carry_
 
-            if not ret_node:
-                ret_node = ListNode(sum_node % 10 + carry_)
-                run_ret = ret_node
+            if not ret_:
+                ret_ = ListNode(sum_ % 10)
+                run_ret = ret_
             else:
-                ret_node.next = ListNode(sum_node % 10 + carry_)
-                ret_node = ret_node.next
-            
-            carry_ = sum_node // 10
+                run_ret.next = ListNode(sum_ % 10)
+                run_ret = run_ret.next
+            carry_ = sum_ // 10
             run1 = run1.next
             run2 = run2.next
         else:
             while run1:
-                if not ret_node:
-                    ret_node = ListNode((run1.val + carry_) % 10)
-                    run_ret  = ret_node
-
+                sum_ = run1.val + carry_
+                if not ret_:
+                    ret_ = ListNode(sum_ % 10)
+                    run_ret = ret_
                 else:
-                    run_ret.next = ListNode((run1.val + carry_) % 10)
+                    run_ret.next = ListNode(sum_ % 10)
                     run_ret = run_ret.next
-                carry_ = (run1.val + carry_) // 10
+                carry_ = sum_ // 10
+                run1 = run1.next
             while run2:
-                if not ret_node:
-                    ret_node = ListNode((run2.val + carry_) % 10)
-                    run_ret = ret_node
+                sum_ = run2.val + carry_
+                if not ret_:
+                    ret_ = ListNode(sum_ % 10)
+                    run_ret = ret_
                 else:
-                    run_ret.next = ListNode((run2.val + carry_) % 10)
-                    run_ret = ret_node.next
-                carry_ = (run2.val + carry_) // 10
-        return ret_node
-    # END addTwoNumbers 
+                    run_ret.next = ListNode(sum_ % 10)
+                    run_ret = run_ret.next
+                carry_ = sum_ // 10
+                run2 = run2.next
+            if carry_:
+                run_ret.next = ListNode(carry_)
+
+        return ret_
+            
 
     def print_solution(self, input: ListNode):
         r_list = []
