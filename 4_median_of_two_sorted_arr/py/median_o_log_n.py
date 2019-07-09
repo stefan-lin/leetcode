@@ -18,7 +18,21 @@ e.g.
     nums1 = [1, 3] and nums2 = [2]    => median is 2
 
 In this question, we are looking for K = (m+n)/2 or both K and K+1 depending 
-on odd size or even size of combined array. 
+on odd size or even size of combined array. The purpose of K is that we are
+partitioning BOTH arrays into two groups which the first half has less than
+or equal to the number of elements in the second half (usually one off or 
+the same)
+
+e.g. 
+    A = [2, 3, 5, 8]         # len(A) = 4
+    B = [1, 4, 6, 9, 11]     # len(B) = 5
+    K = (4 + 5) / 2 = 4
+    partition_a = K / 2 = 2
+    partition_b = K - partition_a = 4 - 2 = 2
+    Thus, the two groups would look like:
+        group_1 = [2, 3, 1, 4] = [1, 2, 3, 4]
+        group_2 = [5, 8, 6, 9, 11] = [5, 6, 8, 9, 11]
+        # note: all elements in group_1 is less than smallest element(5) in group_2
 """
 
 class Solution(object):
